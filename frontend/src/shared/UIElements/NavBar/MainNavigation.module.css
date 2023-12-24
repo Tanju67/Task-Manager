@@ -1,0 +1,14 @@
+.mainNavigation {
+  background-color: #222;
+  padding: 2rem;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  text-transform: uppercase;
+  font-size: 2rem;
+  font-weight: bold;
+}

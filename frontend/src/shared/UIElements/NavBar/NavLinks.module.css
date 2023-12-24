@@ -1,0 +1,33 @@
+.navLinks {
+  display: flex;
+  gap: 2rem;
+}
+
+.navLinks li {
+  transition: all 0.3s;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+.navLinks li:last-child {
+  transition: all 0.3s;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: coral;
+}
+
+.navLinks a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.navLinks li:not(:last-child):hover {
+  background-color: #fff;
+}
+
+.navLinks li:not(:last-child):hover a {
+  color: #333;
+}
+
+.navLinks li:last-child:hover {
+  background-color: rgb(219, 70, 16);
+}
