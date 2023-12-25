@@ -1,0 +1,44 @@
+.page {
+  display: flex;
+  justify-content: center;
+}
+.login {
+  background-color: #fff;
+  width: 35rem;
+  margin-top: 4rem;
+  padding: 2rem;
+}
+
+.login h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.login p {
+  font-size: 1.4rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.action {
+  display: flex;
+  flex-direction: column;
+}
+
+.action button {
+  border: none;
+  background-color: coral;
+  padding: 1rem;
+  color: #fff;
+  border-radius: 1rem;
+  font-size: 1.8rem;
+  transition: all 0.3s;
+}
+
+.action button:hover {
+  background-color: rgb(219, 70, 16);
+}
+
+.action button:disabled {
+  background-color: #666;
+}
