@@ -1,0 +1,19 @@
+.formControl {
+  margin-bottom: 3rem;
+  height: 4rem;
+}
+
+.formControl input {
+  height: 3.2rem;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #666;
+  outline: none;
+}
+
+.formControl .errMsg {
+  text-align: start;
+  color: red;
+  font-size: 1.2rem;
+  height: 1rem;
+}
