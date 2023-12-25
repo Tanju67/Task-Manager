@@ -1,0 +1,53 @@
+.taskItem {
+  position: relative;
+  background-color: #fff;
+  width: 100%;
+  padding: 1rem 1rem 1rem 3rem;
+  border-radius: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.taskItem::before {
+  content: "";
+  background-color: coral;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2rem;
+  height: 100%;
+  border-radius: 1rem 0 0 1rem;
+}
+.taskItem span {
+  padding: 0.5rem;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s;
+}
+
+.edit:hover {
+  background-color: rgb(123, 241, 123);
+}
+.edit:hover svg {
+  stroke: #fff;
+}
+
+.delete:hover {
+  background-color: red;
+}
+
+.delete:hover svg {
+  fill: #fff;
+}
+
+.taskIcon {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

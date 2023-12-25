@@ -1,0 +1,47 @@
+.tasks {
+  position: relative;
+  flex: 3;
+  background-color: #666;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  overflow-y: scroll;
+  padding: 1rem;
+}
+
+.tasks h3 {
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.actionTask {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  left: 1rem;
+}
+
+.actionTask button {
+  border: none;
+  background-color: coral;
+  padding: 1rem;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 1.8rem;
+  transition: all 0.3s;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.actionTask button:hover {
+  background-color: rgb(219, 70, 16);
+  cursor: pointer;
+}
+
+.actionTask button:disabled {
+  background-color: #666;
+}

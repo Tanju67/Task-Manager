@@ -1,0 +1,32 @@
+.ctgItem {
+  position: relative;
+  background-color: #fff;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 1rem;
+  transition: all 0.3s;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+.ctgItem::before {
+  content: "";
+  background-color: coral;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0.7rem;
+  border-radius: 1rem 1rem 0 0;
+}
+
+.ctgItem:hover {
+  background-color: coral;
+}
+
+.ctgItem.active {
+  background-color: coral;
+  color: #fff;
+}
