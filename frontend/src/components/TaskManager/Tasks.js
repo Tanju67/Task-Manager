@@ -18,6 +18,12 @@ const tasks = [
     completed: false,
     category: "homework",
   },
+  {
+    id: "t2",
+    task: "clean the house",
+    completed: true,
+    category: "homework",
+  },
 ];
 
 function Tasks(props) {
@@ -42,7 +48,12 @@ function Tasks(props) {
               <button onClick={() => setShowModal(true)}>+</button>
             </div>
             {filteredTask.map((task) => (
-              <TaskItem id={task.id} key={task.id} task={task.task} />
+              <TaskItem
+                id={task.id}
+                key={task.id}
+                task={task.task}
+                completed={task.completed}
+              />
             ))}
 
             {filteredTask.length === 0 && <p>You don't have any task yet.</p>}

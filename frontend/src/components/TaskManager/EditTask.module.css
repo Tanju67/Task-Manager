@@ -1,10 +1,10 @@
-.addTask {
+.editTask {
   position: relative;
   background-color: #444;
   padding: 3rem;
 }
 
-.addTask span {
+.editTask span {
   position: absolute;
   right: -3rem;
   top: -3rem;
@@ -18,12 +18,12 @@
   transition: all 0.3s;
   cursor: pointer;
 }
-.addTask h3 {
+.editTask h3 {
   margin-bottom: 1rem;
   text-align: center;
 }
 
-.addTask input {
+.editTask input {
   padding: 1rem;
   border-radius: 0.5rem;
   border: none;
@@ -49,10 +49,25 @@
 }
 
 .action button:hover,
-.addTask span:hover {
+.editTask span:hover {
   background-color: rgb(219, 70, 16);
 }
 
 .action button:disabled {
   background-color: #666;
+}
+
+.checkControl {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.formControl label {
+}
+
+.editTask .checkbox {
+  width: 1.8rem;
+  display: block;
+  margin: 0;
 }
