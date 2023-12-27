@@ -1,6 +1,7 @@
 require("express-async-errors");
 require("dotenv").config();
 const express = require("express");
+const cookieParser = require("cookie-parser");
 const connectDB = require("./db/connect");
 const errorHandler = require("./errors/error-handler");
 const notFound = require("./errors/not-found");
@@ -8,6 +9,21 @@ const authRoutes = require("./routes/authRoutes");
 const app = express();
 
 app.use(express.json());
+
+//cookie parser
+app.use(cookieParser());
+
+//cors middleware
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin,X-Requested-With,Content-Type,Accept,Authorization"
+  );
+  res.header("Access-Control-Allow-Credentials", true);
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,PATCH,DELETE");
+  next();
+});
 
 app.use("/api/v1/auth", authRoutes);
 
