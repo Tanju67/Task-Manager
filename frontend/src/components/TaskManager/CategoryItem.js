@@ -3,7 +3,6 @@ import classes from "./CategoryItem.module.css";
 import { RiDeleteBinLine } from "react-icons/ri";
 
 function CategoryItem(props) {
-  console.log(props);
   return (
     <div
       onClick={() => props.onClick(props.ctg)}

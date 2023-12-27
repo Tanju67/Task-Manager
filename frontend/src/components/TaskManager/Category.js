@@ -4,7 +4,6 @@ import Card from "../../shared/UIElements/Card";
 import CategoryItem from "./CategoryItem";
 
 function Category(props) {
-  console.log(props);
   return (
     <Card className={classes.catagory}>
       <h3>CATEGORIES</h3>
