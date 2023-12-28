@@ -1,8 +1,9 @@
-import React, { useCallback, useReducer } from "react";
+import React, { useCallback, useContext, useReducer, useState } from "react";
 import classes from "./Login.module.css";
 import Card from "../../shared/UIElements/Card";
 import Input from "../../shared/FormElements/Input";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../shared/context/auth-context";
 
 const initialState = {
   inputs: {
@@ -55,6 +56,11 @@ const formReducer = (state, action) => {
 
 function Login() {
   const [formState, dispatch] = useReducer(formReducer, initialState);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const navigate = useNavigate();
+  const authCtx = useContext(AuthContext);
+  console.log(authCtx);
 
   const emailIsValid = (val) => {
     let isValid = true;
@@ -64,7 +70,7 @@ function Login() {
 
   const passwordIsValid = (val) => {
     let isValid = true;
-    isValid = isValid && val.trim().length >= 5;
+    isValid = isValid && val.trim().length >= 6;
     return isValid;
   };
 
@@ -79,10 +85,34 @@ function Login() {
     dispatch({ type: "VALID" });
   }, []);
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
+
+    try {
+      setIsLoading(true);
+      const res = await fetch(`http://localhost:5000/api/v1/auth/login`, {
+        credentials: "include",
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: formState.inputs.email.value,
+          password: formState.inputs.password.value,
+        }),
+      });
+      const data = await res.json();
+      console.log(data.user);
+      authCtx.login({
+        userId: data.user._id,
+        userName: data.user.name,
+        email: data.user.email,
+      });
+      setIsLoading(false);
+      navigate("/");
+    } catch (error) {
+      setError(error);
+      setIsLoading(false);
+    }
     dispatch({ type: "RESET" });
-    console.log(formState);
   };
   return (
     <div className={classes.page}>

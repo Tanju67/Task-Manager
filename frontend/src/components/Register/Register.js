@@ -1,8 +1,8 @@
-import React, { useCallback, useReducer } from "react";
+import React, { useCallback, useReducer, useState } from "react";
 import classes from "./Register.module.css";
 import Card from "../../shared/UIElements/Card";
 import Input from "../../shared/FormElements/Input";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const initialState = {
   inputs: {
@@ -70,6 +70,9 @@ const formReducer = (state, action) => {
 
 function Register() {
   const [formState, dispatch] = useReducer(formReducer, initialState);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const navigate = useNavigate();
 
   const nameIsValid = (val) => {
     let isValid = true;
@@ -104,10 +107,29 @@ function Register() {
     dispatch({ type: "VALID" });
   }, []);
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
+    try {
+      console.log(formState.inputs.name.value);
+      setIsLoading(true);
+      const res = await fetch(`http://localhost:5000/api/v1/auth/register`, {
+        credentials: "include",
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formState.inputs.name.value,
+          email: formState.inputs.email.value,
+          password: formState.inputs.password.value,
+        }),
+      });
+      console.log(res);
+      setIsLoading(false);
+      navigate("/login");
+    } catch (error) {
+      setError(error);
+      setIsLoading(false);
+    }
     dispatch({ type: "RESET" });
-    console.log(formState);
   };
   return (
     <div className={classes.page}>

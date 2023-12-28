@@ -19,7 +19,7 @@ const tasks = [
     category: "homework",
   },
   {
-    id: "t2",
+    id: "t3",
     task: "clean the house",
     completed: true,
     category: "homework",

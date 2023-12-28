@@ -46,3 +46,7 @@
   margin-top: 2rem;
   text-align: center;
 }
+
+.cardContent h1 {
+  text-transform: capitalize;
+}
