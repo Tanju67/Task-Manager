@@ -6,6 +6,7 @@ const connectDB = require("./db/connect");
 const errorHandler = require("./errors/error-handler");
 const notFound = require("./errors/not-found");
 const authRoutes = require("./routes/authRoutes");
+const taskRoutes = require("./routes/taskRoutes");
 const app = express();
 
 app.use(express.json());
@@ -26,6 +27,8 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/v1/auth", authRoutes);
+
+app.use("/api/v1", taskRoutes);
 
 //error handler and not found middleware
 app.use(notFound);
