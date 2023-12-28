@@ -22,7 +22,7 @@ router.delete("/category/:cId", deleteCategory);
 
 router.get("/task/:cId", getAllTask);
 
-router.post("/task", createTask);
+router.post("/task/:cId", createTask);
 
 router.patch("/task/:tId", updateTask);
 

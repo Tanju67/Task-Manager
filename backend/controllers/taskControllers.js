@@ -22,13 +22,34 @@ const deleteCategory = async (req, res, next) => {
   res.status(200).json({ category });
 };
 
-const createTask = async (req, res, next) => {};
+const createTask = async (req, res, next) => {
+  const { task } = req.body;
+  const categoryId = req.params.cId;
+  const taskObj = await TaskModel.create({ task, category: categoryId });
+  res.status(200).json({ taskObj });
+};
 
-const getAllTask = async (req, res, next) => {};
+const getAllTask = async (req, res, next) => {
+  const categoryId = req.params.cId;
+  const taskObj = await TaskModel.find({ category: categoryId });
+  res.status(200).json({ taskObj });
+};
 
-const updateTask = async (req, res, next) => {};
+const updateTask = async (req, res, next) => {
+  const taskId = req.params.tId;
+  const task = await TaskModel.findOneAndUpdate(
+    { _id: taskId },
+    { task: req.body.task },
+    { new: true }
+  );
+  res.status(200).json({ task });
+};
 
-const deleteTask = async (req, res, next) => {};
+const deleteTask = async (req, res, next) => {
+  const taskId = req.params.tId;
+  const task = await TaskModel.findByIdAndDelete(taskId);
+  res.status(200).json({ msg: "deleted successfully" });
+};
 
 module.exports = {
   createCategory,
