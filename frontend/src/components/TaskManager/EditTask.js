@@ -1,26 +1,44 @@
 import React, { useState } from "react";
 import classes from "./EditTask.module.css";
+import { Bars } from "react-loader-spinner";
 
 function EditTask(props) {
   const [task, setTask] = useState(props.task);
   const [checked, setChecked] = useState(props.completed);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
+
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
+      setIsLoading(true);
       const res = await fetch(`http://localhost:5000/api/v1/task/${props.id}`, {
         credentials: "include",
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ task: task, completed: checked }),
       });
+      setIsLoading(false);
     } catch (error) {
-      console.log(error);
+      setIsLoading(false);
+      setError(error);
     }
     props.categoryHandler(props.categoryId, props.categoryName);
     props.setShowModal(false);
   };
   return (
     <div className={classes.editTask}>
+      {isLoading && (
+        <Bars
+          height="30"
+          width="30"
+          color="coral"
+          ariaLabel="bars-loading"
+          wrapperStyle={{}}
+          wrapperClass={classes.bars}
+          visible={true}
+        />
+      )}
       <span onClick={() => props.setShowModal(false)}>x</span>
       <h3>Edit Your Task</h3>
       <form onSubmit={submitHandler}>

@@ -4,6 +4,7 @@ import Card from "../../shared/UIElements/Card";
 import TaskItem from "./TaskItem";
 import Modal from "../../shared/UIElements/Modal";
 import AddTask from "./AddTask";
+import { Bars } from "react-loader-spinner";
 
 function Tasks(props) {
   const [showModal, setShowModal] = useState(false);
@@ -57,6 +58,17 @@ function Tasks(props) {
             <h3>your tasks </h3>
             <p>You have to add first a category in order to add tasks.</p>
           </>
+        )}
+        {props.isLoading && (
+          <Bars
+            height="30"
+            width="30"
+            color="coral"
+            ariaLabel="bars-loading"
+            wrapperStyle={{}}
+            wrapperClass={classes.bars}
+            visible={true}
+          />
         )}
       </Card>
     </>

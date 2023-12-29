@@ -3,6 +3,7 @@ import classes from "./Register.module.css";
 import Card from "../../shared/UIElements/Card";
 import Input from "../../shared/FormElements/Input";
 import { NavLink, useNavigate } from "react-router-dom";
+import { Bars } from "react-loader-spinner";
 
 const initialState = {
   inputs: {
@@ -135,7 +136,17 @@ function Register() {
     <div className={classes.page}>
       <Card className={classes.login}>
         <h2>REGISTER</h2>
-
+        {isLoading && (
+          <Bars
+            height="30"
+            width="30"
+            color="coral"
+            ariaLabel="bars-loading"
+            wrapperStyle={{}}
+            wrapperClass={classes.bars}
+            visible={true}
+          />
+        )}
         <form onSubmit={submitHandler}>
           <Input
             id="name"

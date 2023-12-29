@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./CategoryItem.module.css";
 import { RiDeleteBinLine } from "react-icons/ri";
+import { Bars } from "react-loader-spinner";
 
 function CategoryItem(props) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
   const categoryDeleteHandler = async () => {
     try {
+      setIsLoading(true);
       const res = await fetch(
         `http://localhost:5000/api/v1/category/${props.id}`,
         {
@@ -12,8 +16,10 @@ function CategoryItem(props) {
           method: "DELETE",
         }
       );
+      setIsLoading(false);
     } catch (error) {
-      console.log(error);
+      setIsLoading(false);
+      setError(error);
     }
     props.onClick(props.id, props.categoryName);
   };
@@ -28,6 +34,17 @@ function CategoryItem(props) {
       }`}
       id={props.id}
     >
+      {isLoading && (
+        <Bars
+          height="30"
+          width="30"
+          color="coral"
+          ariaLabel="bars-loading"
+          wrapperStyle={{}}
+          wrapperClass={classes.bars}
+          visible={true}
+        />
+      )}
       <span>{props.ctg}</span>
       <span className={classes.delete} onClick={categoryDeleteHandler}>
         <RiDeleteBinLine />

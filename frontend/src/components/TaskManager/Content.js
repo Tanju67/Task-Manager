@@ -9,11 +9,14 @@ function Content() {
   const [catagoryName, setCategoryName] = useState("");
   const [categoryData, setCategoryData] = useState([]);
   const [categoryTasksData, setCategoryTasksData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   console.log(categoryTasksData);
 
   useEffect(() => {
     const getCategoryData = async () => {
+      setIsLoading(true);
       try {
         const res = await fetch(`http://localhost:5000/api/v1/category`, {
           credentials: "include",
@@ -21,8 +24,10 @@ function Content() {
         const data = await res.json();
 
         setCategoryData(data.category);
+        setIsLoading(false);
       } catch (error) {
-        console.log(error);
+        setError(error);
+        setIsLoading(false);
       }
     };
     getCategoryData();
@@ -30,6 +35,7 @@ function Content() {
 
   const categoryHandler = async (ctg, ctgName) => {
     try {
+      setIsLoading(true);
       const res = await fetch(`http://localhost:5000/api/v1/task/${ctg}`, {
         credentials: "include",
       });
@@ -38,8 +44,10 @@ function Content() {
       console.log(data.taskObj);
 
       setCategoryTasksData(data.taskObj);
+      setIsLoading(false);
     } catch (error) {
-      console.log(error);
+      setError(error);
+      setIsLoading(false);
     }
     setCategoryId(ctg);
     setCategoryName(ctgName);
@@ -52,6 +60,7 @@ function Content() {
         category={categoryId}
         categoryName={catagoryName}
         data={categoryData}
+        isLoading={isLoading}
       />
       <Tasks
         category={categoryId}
@@ -59,6 +68,7 @@ function Content() {
         categoryName={catagoryName}
         hasCategory={categoryData.length > 0}
         taskData={categoryTasksData}
+        isLoading={isLoading}
       />
     </div>
   );

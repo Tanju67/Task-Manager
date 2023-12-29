@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import classes from "./AddTask.module.css";
 import { useNavigate } from "react-router-dom";
+import { Bars } from "react-loader-spinner";
 
 function AddTask(props) {
   const [task, setTask] = useState("");
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
+      setIsLoading(true);
       const res = await fetch(
         `http://localhost:5000/api/v1/task/${props.categoryId}`,
         {
@@ -19,14 +23,27 @@ function AddTask(props) {
         }
       );
       navigate("/tasks-manager");
+      setIsLoading(false);
     } catch (error) {
-      console.log(error);
+      setIsLoading(false);
+      setError(error);
     }
     props.categoryHandler(props.categoryId, props.categoryName);
     props.setShowModal(false);
   };
   return (
     <div className={classes.addTask}>
+      {isLoading && (
+        <Bars
+          height="30"
+          width="30"
+          color="coral"
+          ariaLabel="bars-loading"
+          wrapperStyle={{}}
+          wrapperClass={classes.bars}
+          visible={true}
+        />
+      )}
       <span onClick={() => props.setShowModal(false)}>x</span>
       <h3>Add Your Task</h3>
       <form onSubmit={submitHandler}>
