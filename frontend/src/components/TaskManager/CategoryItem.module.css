@@ -10,6 +10,7 @@
   transition: all 0.3s;
   font-size: 1.4rem;
   cursor: pointer;
+  text-transform: capitalize;
 }
 .ctgItem::before {
   content: "";

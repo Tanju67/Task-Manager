@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import classes from "./AddTask.module.css";
-import { useNavigate } from "react-router-dom";
+
 import { Bars } from "react-loader-spinner";
 
 function AddTask(props) {
   const [task, setTask] = useState("");
-  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -13,16 +12,12 @@ function AddTask(props) {
     e.preventDefault();
     try {
       setIsLoading(true);
-      const res = await fetch(
-        `http://localhost:5000/api/v1/task/${props.categoryId}`,
-        {
-          credentials: "include",
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ task: task }),
-        }
-      );
-      navigate("/tasks-manager");
+      await fetch(`http://localhost:5000/api/v1/task/${props.categoryId}`, {
+        credentials: "include",
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ task: task }),
+      });
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);

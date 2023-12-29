@@ -27,6 +27,7 @@ function Category(props) {
           categoryName={props.categoryName}
           ctg={ctg.category}
           onClick={props.categoryHandler}
+          getCategoryData={props.getCategoryData}
         />
       ))}
     </Card>

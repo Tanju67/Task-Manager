@@ -6,7 +6,7 @@ import { AiOutlineHome } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { Bars } from "react-loader-spinner";
 
-function SideBar() {
+function SideBar(props) {
   const navigate = useNavigate();
   const [category, setCategory] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -24,6 +24,7 @@ function SideBar() {
       });
       setCategory("");
       setIsLoading(false);
+      props.getCategoryData();
     } catch (error) {
       setError(error);
       setIsLoading(false);

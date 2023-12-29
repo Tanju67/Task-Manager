@@ -100,7 +100,6 @@ function Login() {
         }),
       });
       const data = await res.json();
-      console.log(data.user);
       authCtx.login({
         userId: data.user._id,
         userName: data.user.name,

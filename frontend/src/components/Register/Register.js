@@ -111,7 +111,6 @@ function Register() {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      console.log(formState.inputs.name.value);
       setIsLoading(true);
       const res = await fetch(`http://localhost:5000/api/v1/auth/register`, {
         credentials: "include",

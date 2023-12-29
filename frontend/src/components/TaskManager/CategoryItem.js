@@ -9,14 +9,12 @@ function CategoryItem(props) {
   const categoryDeleteHandler = async () => {
     try {
       setIsLoading(true);
-      const res = await fetch(
-        `http://localhost:5000/api/v1/category/${props.id}`,
-        {
-          credentials: "include",
-          method: "DELETE",
-        }
-      );
+      await fetch(`http://localhost:5000/api/v1/category/${props.id}`, {
+        credentials: "include",
+        method: "DELETE",
+      });
       setIsLoading(false);
+      props.getCategoryData();
     } catch (error) {
       setIsLoading(false);
       setError(error);

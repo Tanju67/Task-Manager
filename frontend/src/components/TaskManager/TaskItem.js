@@ -10,7 +10,6 @@ function TaskItem(props) {
   const [showModal, setShowModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  console.log(props);
 
   const taskEditHandler = async () => {
     setShowModal(true);
@@ -63,7 +62,7 @@ function TaskItem(props) {
             visible={true}
           />
         )}
-        <div>{props.task}</div>
+        <div className={classes.text}>{props.task}</div>
         <div className={classes.taskIcon}>
           <span className={classes.edit} onClick={taskEditHandler}>
             <FiEdit />

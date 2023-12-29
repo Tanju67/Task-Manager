@@ -9,6 +9,10 @@
   align-items: center;
 }
 
+.text::first-letter {
+  text-transform: uppercase;
+}
+
 .taskItem::before {
   content: "";
   background-color: coral;
