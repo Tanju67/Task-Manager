@@ -60,7 +60,6 @@ function Login() {
   const [error, setError] = useState(false);
   const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
-  console.log(authCtx);
 
   const emailIsValid = (val) => {
     let isValid = true;

@@ -1,11 +1,28 @@
 import React, { useState } from "react";
 import classes from "./AddTask.module.css";
+import { useNavigate } from "react-router-dom";
 
 function AddTask(props) {
   const [task, setTask] = useState("");
+  const navigate = useNavigate();
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
+    try {
+      const res = await fetch(
+        `http://localhost:5000/api/v1/task/${props.categoryId}`,
+        {
+          credentials: "include",
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ task: task }),
+        }
+      );
+      navigate("/tasks-manager");
+    } catch (error) {
+      console.log(error);
+    }
+    props.categoryHandler(props.categoryId, props.categoryName);
     props.setShowModal(false);
   };
   return (

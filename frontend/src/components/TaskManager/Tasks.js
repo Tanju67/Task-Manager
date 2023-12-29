@@ -5,58 +5,51 @@ import TaskItem from "./TaskItem";
 import Modal from "../../shared/UIElements/Modal";
 import AddTask from "./AddTask";
 
-const tasks = [
-  {
-    id: "t1",
-    task: "Read a book",
-    completed: false,
-    category: "homework",
-  },
-  {
-    id: "t2",
-    task: "Read a book",
-    completed: false,
-    category: "homework",
-  },
-  {
-    id: "t3",
-    task: "clean the house",
-    completed: true,
-    category: "homework",
-  },
-];
-
 function Tasks(props) {
   const [showModal, setShowModal] = useState(false);
-  const filteredTask = tasks.filter(
-    (task) =>
-      task.category.trim().toLowerCase() === props.category.trim().toLowerCase()
-  );
 
   return (
     <>
       {showModal && (
         <Modal onCloseBackdrop={() => setShowModal(false)}>
-          <AddTask setShowModal={setShowModal} />
+          <AddTask
+            setShowModal={setShowModal}
+            categoryId={props.category}
+            categoryName={props.categoryName}
+            categoryHandler={props.categoryHandler}
+          />
         </Modal>
       )}
       <Card className={classes.tasks}>
         {props.hasCategory && (
           <>
-            <h3>your tasks for {props.category}</h3>
+            <h3>your tasks for {props.categoryName}</h3>
             <div className={classes.actionTask}>
-              <button onClick={() => setShowModal(true)}>+</button>
+              <button
+                disabled={props.category === ""}
+                onClick={() => setShowModal(true)}
+              >
+                +
+              </button>
             </div>
-            {filteredTask.map((task) => (
+            {props.taskData.map((task) => (
               <TaskItem
-                id={task.id}
-                key={task.id}
+                id={task._id}
+                key={task._id}
                 task={task.task}
                 completed={task.completed}
+                categoryId={props.category}
+                categoryName={props.categoryName}
+                categoryHandler={props.categoryHandler}
               />
             ))}
 
-            {filteredTask.length === 0 && <p>You don't have any task yet.</p>}
+            {props.taskData.length === 0 && (
+              <p>
+                You don't have any task yet. First click on a category and later
+                add a task by clicking + .
+              </p>
+            )}
           </>
         )}
         {!props.hasCategory && (

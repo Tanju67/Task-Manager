@@ -16,6 +16,7 @@ const getAllCategories = async (req, res, next) => {
 const deleteCategory = async (req, res, next) => {
   const id = req.params.cId;
   const category = await CategoryModel.findByIdAndDelete(id);
+  const tasks = await TaskModel.deleteMany({ category: id });
   if (!category) {
     return next(createCustomError("Found no category for provided id.", 404));
   }
@@ -39,7 +40,7 @@ const updateTask = async (req, res, next) => {
   const taskId = req.params.tId;
   const task = await TaskModel.findOneAndUpdate(
     { _id: taskId },
-    { task: req.body.task },
+    { task: req.body.task, completed: req.body.completed },
     { new: true }
   );
   res.status(200).json({ task });

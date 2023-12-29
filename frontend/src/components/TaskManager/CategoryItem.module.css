@@ -30,3 +30,22 @@
   background-color: coral;
   color: #fff;
 }
+
+.delete {
+  padding: 0.5rem;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s;
+}
+.delete:hover {
+  background-color: red;
+}
+
+.delete:hover svg {
+  fill: #fff;
+}

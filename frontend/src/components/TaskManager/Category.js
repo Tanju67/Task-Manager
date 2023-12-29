@@ -9,9 +9,10 @@ function Category(props) {
       <h3>CATEGORIES</h3>
       {props.data.map((ctg) => (
         <CategoryItem
-          key={ctg.id}
-          id={ctg.id}
+          key={ctg._id}
+          id={ctg._id}
           category={props.category}
+          categoryName={props.categoryName}
           ctg={ctg.category}
           onClick={props.categoryHandler}
         />

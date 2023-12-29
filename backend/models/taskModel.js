@@ -4,6 +4,10 @@ const taskSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  completed: {
+    type: Boolean,
+    default: false,
+  },
   category: {
     type: mongoose.Types.ObjectId,
     required: true,
